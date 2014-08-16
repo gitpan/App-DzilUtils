@@ -1,0 +1,80 @@
+#!perl
+
+our $DATE = '2014-08-16'; # DATE
+our $VERSION = '0.01'; # VERSION
+
+use 5.010;
+use strict;
+use warnings;
+
+#use App::DzilUtils;
+use Perinci::CmdLine::Any -prefer_lite=>1;
+
+our %SPEC;
+$SPEC{list_dzil_plugins} = {
+    v => 1.1,
+    summary => 'List installed Dist::Zilla plugins',
+    args => {
+    },
+};
+sub list_dzil_plugins {
+    require Module::List;
+    my %args = @_;
+    my $res = Module::List::list_modules("Dist::Zilla::Plugin::",
+                                         {list_modules=>1, recurse=>1});
+    [200, "OK", [map {s/^Dist::Zilla::Plugin:://;$_} sort keys %$res]];
+}
+
+Perinci::CmdLine::Any->new(
+    url => '/main/list_dzil_plugins',
+)->run;
+
+# ABSTRACT: List installed Dist::Zilla plugins
+# PODNAME: list-dzil-plugins
+
+__END__
+
+=pod
+
+=encoding UTF-8
+
+=head1 NAME
+
+list-dzil-plugins - List installed Dist::Zilla plugins
+
+=head1 VERSION
+
+This document describes version 0.01 of list-dzil-plugins (from Perl distribution App-DzilUtils), released on 2014-08-16.
+
+=head1 SYNOPSIS
+
+ % list-dzil-plugins
+
+=head1 HOMEPAGE
+
+Please visit the project's homepage at L<https://metacpan.org/release/App-DzilUtils>.
+
+=head1 SOURCE
+
+Source repository is at L<https://github.com/sharyanto/perl-App-DzilUtils>.
+
+=head1 BUGS
+
+Please report any bugs or feature requests on the bugtracker website L<https://rt.cpan.org/Public/Dist/Display.html?Name=App-DzilUtils>
+
+When submitting a bug or request, please include a test-file or a
+patch to an existing test-file that illustrates the bug or desired
+feature.
+
+=head1 AUTHOR
+
+Steven Haryanto <stevenharyanto@gmail.com>
+
+=head1 COPYRIGHT AND LICENSE
+
+This software is copyright (c) 2014 by Steven Haryanto.
+
+This is free software; you can redistribute it and/or modify it under
+the same terms as the Perl 5 programming language system itself.
+
+=cut

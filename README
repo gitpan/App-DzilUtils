@@ -1,0 +1,76 @@
+NAME
+    App::DzilUtils - Collection of CLI utilities for Dist::Zilla
+
+VERSION
+    This document describes version 0.01 of App::DzilUtils (from Perl
+    distribution App-DzilUtils), released on 2014-08-16.
+
+SYNOPSIS
+    This distribution provides the following command-line utilities:
+
+     list-dzil-bundle-contents
+     list-dzil-bundles
+     list-dzil-plugin-roles
+     list-dzil-plugins
+
+    Bash tab completion is available. To activate, put this in your shell
+    script startup:
+
+     complete -C list-dzil-bundle-contents list-dzil-bundle-contents
+     complete -C list-dzil-bundles         list-dzil-bundles
+     complete -C list-dzil-plugin-roles    list-dzil-plugin-roles
+     complete -C list-dzil-plugins         list-dzil-plugins
+
+    Check back often, there will be more utilities added.
+
+FAQ
+  In shell completion, why do you use / (slash) instead of :: (double colon) as it should be?
+    If you type module name which doesn't contain any ::, / will be used as
+    namespace separator. Otherwise if you already type ::, it will use ::.
+
+    Colon is problematic because by default it is a word breaking character
+    in bash. This means, in this command:
+
+     % list-dzil-bundle-contents Author:<tab>
+
+    bash is completing a new word (empty string), and in this:
+
+     % list-dzil-bundle-contents Author::SHARYAN<tab>
+
+    bash is completing "SHARYAN" instead of what we want "Author::SHARYAN".
+
+    The solution is to use quotes, e.g.
+
+     % list-dzil-bundle-contents "Author::SHARYAN<tab>
+     % list-dzil-bundle-contents 'Author::SHARYAN<tab>
+
+    or, use /:
+
+     % list-dzil-bundle-contents author/sharyan<tab>
+
+    Note that most completion are made case-insensitive for convenience.
+
+HOMEPAGE
+    Please visit the project's homepage at
+    <https://metacpan.org/release/App-DzilUtils>.
+
+SOURCE
+    Source repository is at
+    <https://github.com/sharyanto/perl-App-DzilUtils>.
+
+BUGS
+    Please report any bugs or feature requests on the bugtracker website
+    <https://rt.cpan.org/Public/Dist/Display.html?Name=App-DzilUtils>
+
+    When submitting a bug or request, please include a test-file or a patch
+    to an existing test-file that illustrates the bug or desired feature.
+
+AUTHOR
+    Steven Haryanto <stevenharyanto@gmail.com>
+
+COPYRIGHT AND LICENSE
+    This software is copyright (c) 2014 by Steven Haryanto.
+
+    This is free software; you can redistribute it and/or modify it under
+    the same terms as the Perl 5 programming language system itself.
+
