@@ -2,8 +2,8 @@ NAME
     App::DzilUtils - Collection of CLI utilities for Dist::Zilla
 
 VERSION
-    This document describes version 0.01 of App::DzilUtils (from Perl
-    distribution App-DzilUtils), released on 2014-08-16.
+    This document describes version 0.02 of App::DzilUtils (from Perl
+    distribution App-DzilUtils), released on 2014-11-28.
 
 SYNOPSIS
     This distribution provides the following command-line utilities:
@@ -66,10 +66,10 @@ BUGS
     to an existing test-file that illustrates the bug or desired feature.
 
 AUTHOR
-    Steven Haryanto <stevenharyanto@gmail.com>
+    perlancar <perlancar@cpan.org>
 
 COPYRIGHT AND LICENSE
-    This software is copyright (c) 2014 by Steven Haryanto.
+    This software is copyright (c) 2014 by perlancar@cpan.org.
 
     This is free software; you can redistribute it and/or modify it under
     the same terms as the Perl 5 programming language system itself.

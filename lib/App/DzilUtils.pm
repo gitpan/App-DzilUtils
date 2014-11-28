@@ -1,7 +1,7 @@
 package App::DzilUtils;
 
-our $DATE = '2014-08-16'; # DATE
-our $VERSION = '0.01'; # VERSION
+our $DATE = '2014-11-28'; # DATE
+our $VERSION = '0.02'; # VERSION
 
 use 5.010001;
 use strict;
@@ -27,7 +27,7 @@ our $_complete_plugin_or_bundle = sub {
         ($which eq 'bundle' ? 'Bundle':'').'::';
 
     {
-        completion => Complete::Module::complete_module(
+        words => Complete::Module::complete_module(
             word      => $word,
             ns_prefix => $ns_prefix,
             find_pmc  => 0,
@@ -35,7 +35,7 @@ our $_complete_plugin_or_bundle = sub {
             separator => $sep,
             ci        => 1, # convenience
         ),
-        path_sep   => $sep,
+        path_sep => $sep,
     };
 };
 
@@ -62,7 +62,7 @@ App::DzilUtils - Collection of CLI utilities for Dist::Zilla
 
 =head1 VERSION
 
-This document describes version 0.01 of App::DzilUtils (from Perl distribution App-DzilUtils), released on 2014-08-16.
+This document describes version 0.02 of App::DzilUtils (from Perl distribution App-DzilUtils), released on 2014-11-28.
 
 =head1 SYNOPSIS
 
@@ -130,11 +130,11 @@ feature.
 
 =head1 AUTHOR
 
-Steven Haryanto <stevenharyanto@gmail.com>
+perlancar <perlancar@cpan.org>
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is copyright (c) 2014 by Steven Haryanto.
+This software is copyright (c) 2014 by perlancar@cpan.org.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.
