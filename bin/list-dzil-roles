@@ -7,61 +7,30 @@ use 5.010;
 use strict;
 use warnings;
 
-use App::DzilUtils;
+#use App::DzilUtils;
 use Perinci::CmdLine::Any -prefer_lite=>1;
 
 our %SPEC;
-$SPEC{list_dzil_bundle_contents} = {
+$SPEC{list_dzil_roles} = {
     v => 1.1,
-    summary => 'List plugins included in a Dist::Zilla plugin bundle',
+    summary => 'List installed Dist::Zilla roles',
     args => {
-        bundle => {
-            schema => 'str*',
-            req    => 1,
-            pos    => 0,
-            completion => $App::DzilUtils::_complete_bundle,
-        },
-        short => {
-            schema => 'bool*',
-            cmdline_aliases => {s=>{}},
-        },
     },
 };
-sub list_dzil_bundle_contents {
-    require Module::Load;
-
+sub list_dzil_roles {
+    require Module::List;
     my %args = @_;
-
-    my $bundle = $args{bundle};
-    $bundle =~ s/^Dist::Zilla::PluginBundle:://;
-    $bundle =~ s!/!::!g; # convenience
-
-    my $module = "Dist::Zilla::PluginBundle::$bundle";
-    Module::Load::load($module);
-
-    my $obj = $module->new(name => 'bundle', payload=>{});
-    $obj->configure;
-
-    my $plugins = $obj->plugins;
-    my $res = [];
-    for (@$plugins) {
-        if ($args{short}) {
-            $_->[1] =~ s/^Dist::Zilla::Plugin:://;
-            push @$res, $_->[1];
-        } else {
-            push @$res, [$_->[0], $_->[1]];
-        }
-    }
-
-    [200, "OK", $res];
+    my $res = Module::List::list_modules("Dist::Zilla::Role::",
+                                         {list_modules=>1, recurse=>1});
+    [200, "OK", [map {s/^Dist::Zilla::Role:://;$_} sort keys %$res]];
 }
 
 Perinci::CmdLine::Any->new(
-    url => '/main/list_dzil_bundle_contents',
+    url => '/main/list_dzil_roles',
 )->run;
 
-# ABSTRACT: List plugins included in a Dist::Zilla plugin bundle
-# PODNAME: list-dzil-bundle-contents
+# ABSTRACT: List installed Dist::Zilla plugins
+# PODNAME: list-dzil-roles
 
 __END__
 
@@ -71,15 +40,15 @@ __END__
 
 =head1 NAME
 
-list-dzil-bundle-contents - List plugins included in a Dist::Zilla plugin bundle
+list-dzil-roles - List installed Dist::Zilla plugins
 
 =head1 VERSION
 
-This document describes version 0.03 of list-dzil-bundle-contents (from Perl distribution App-DzilUtils), released on 2014-12-15.
+This document describes version 0.03 of list-dzil-roles (from Perl distribution App-DzilUtils), released on 2014-12-15.
 
 =head1 SYNOPSIS
 
- % list-dzil-bundle-contents Author::PERLANCAR
+ % list-dzil-roles
 
 =head1 COMPLETION
 
@@ -89,7 +58,7 @@ This script has shell tab completion capability with support for several shells.
 
 To activate bash completion for this script, put:
 
- complete -C list-dzil-bundle-contents list-dzil-bundle-contents
+ complete -C list-dzil-roles list-dzil-roles
 
 in your bash startup (e.g. C<~/.bashrc>). Your next shell session will then recognize tab completion for the command. Or, you can also directly execute the line above in your shell to activate immediately.
 
@@ -99,7 +68,7 @@ It is recommended, however, that you install L<shcompgen> which allows you to ac
 
 To activate tcsh completion for this script, put:
 
- complete list-dzil-bundle-contents 'p/*/`list-dzil-bundle-contents`/'
+ complete list-dzil-roles 'p/*/`list-dzil-roles`/'
 
 in your tcsh startup (e.g. C<~/.tcshrc>). Your next shell session will then recognize tab completion for the command. Or, you can also directly execute the line above in your shell to activate immediately.
 

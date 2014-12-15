@@ -1,13 +1,13 @@
 package App::DzilUtils;
 
-our $DATE = '2014-11-28'; # DATE
-our $VERSION = '0.02'; # VERSION
+our $DATE = '2014-12-15'; # DATE
+our $VERSION = '0.03'; # VERSION
 
 use 5.010001;
 use strict;
 use warnings;
 
-our $_complete_plugin_or_bundle = sub {
+our $_complete_stuff = sub {
     require Complete::Module;
     my $which = shift;
     my %args = @_;
@@ -23,8 +23,10 @@ our $_complete_plugin_or_bundle = sub {
     # break character in bash/readline.
     my $sep = $word =~ /::/ ? '::' : '/';
     $word =~ s/\W+/::/g;
-    my $ns_prefix    = 'Dist::Zilla::Plugin'.
-        ($which eq 'bundle' ? 'Bundle':'').'::';
+    my $ns_prefix    = 'Dist::Zilla::'.
+        ($which eq 'bundle' ? 'PluginBundle' :
+             $which eq 'plugin' ? 'Plugin' :
+                 $which eq 'role' ? 'Role' : '').'::';
 
     {
         words => Complete::Module::complete_module(
@@ -39,12 +41,16 @@ our $_complete_plugin_or_bundle = sub {
     };
 };
 
-our $_complete_plugin = sub {
-    $_complete_plugin_or_bundle->('plugin', @_);
+our $_complete_bundle = sub {
+    $_complete_stuff->('bundle', @_);
 };
 
-our $_complete_bundle = sub {
-    $_complete_plugin_or_bundle->('bundle', @_);
+our $_complete_plugin = sub {
+    $_complete_stuff->('plugin', @_);
+};
+
+our $_complete_role = sub {
+    $_complete_stuff->('role', @_);
 };
 
 1;
@@ -62,55 +68,12 @@ App::DzilUtils - Collection of CLI utilities for Dist::Zilla
 
 =head1 VERSION
 
-This document describes version 0.02 of App::DzilUtils (from Perl distribution App-DzilUtils), released on 2014-11-28.
+This document describes version 0.03 of App::DzilUtils (from Perl distribution App-DzilUtils), released on 2014-12-15.
 
 =head1 SYNOPSIS
 
-This distribution provides the following command-line utilities:
-
- list-dzil-bundle-contents
- list-dzil-bundles
- list-dzil-plugin-roles
- list-dzil-plugins
-
-Bash tab completion is available. To activate, put this in your shell script
-startup:
-
- complete -C list-dzil-bundle-contents list-dzil-bundle-contents
- complete -C list-dzil-bundles         list-dzil-bundles
- complete -C list-dzil-plugin-roles    list-dzil-plugin-roles
- complete -C list-dzil-plugins         list-dzil-plugins
-
-Check back often, there will be more utilities added.
-
-=head1 FAQ
-
-=head2 In shell completion, why do you use / (slash) instead of :: (double colon) as it should be?
-
-If you type module name which doesn't contain any ::, / will be used as
-namespace separator. Otherwise if you already type ::, it will use ::.
-
-Colon is problematic because by default it is a word breaking character in bash.
-This means, in this command:
-
- % list-dzil-bundle-contents Author:<tab>
-
-bash is completing a new word (empty string), and in this:
-
- % list-dzil-bundle-contents Author::SHARYAN<tab>
-
-bash is completing C<SHARYAN> instead of what we want C<Author::SHARYAN>.
-
-The solution is to use quotes, e.g.
-
- % list-dzil-bundle-contents "Author::SHARYAN<tab>
- % list-dzil-bundle-contents 'Author::SHARYAN<tab>
-
-or, use /:
-
- % list-dzil-bundle-contents author/sharyan<tab>
-
-Note that most completion are made case-insensitive for convenience.
+This distribution provides several command-line utilities related to
+L<Dist::Zilla>.
 
 =head1 HOMEPAGE
 
