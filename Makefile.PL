@@ -28,7 +28,7 @@ my %WriteMakefileArgs = (
   "MIN_PERL_VERSION" => "5.010001",
   "NAME" => "App::DzilUtils",
   "PREREQ_PM" => {
-    "Complete::Module" => "0.06",
+    "Complete::Dist::Zilla" => "0.02",
     "Module::List" => 0,
     "Perinci::CmdLine::Any" => 0,
     "Rinci" => "1.1.0"
@@ -39,7 +39,7 @@ my %WriteMakefileArgs = (
     "IPC::Open3" => 0,
     "Test::More" => 0
   },
-  "VERSION" => "0.04",
+  "VERSION" => "0.05",
   "test" => {
     "TESTS" => "t/*.t"
   }
@@ -47,7 +47,7 @@ my %WriteMakefileArgs = (
 
 
 my %FallbackPrereqs = (
-  "Complete::Module" => "0.06",
+  "Complete::Dist::Zilla" => "0.02",
   "ExtUtils::MakeMaker" => 0,
   "File::Spec" => 0,
   "IO::Handle" => 0,

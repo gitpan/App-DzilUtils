@@ -1,55 +1,9 @@
 package App::DzilUtils;
 
-our $DATE = '2014-12-27'; # DATE
-our $VERSION = '0.04'; # VERSION
+our $DATE = '2014-12-28'; # DATE
+our $VERSION = '0.05'; # VERSION
 
 use 5.010001;
-use strict;
-use warnings;
-
-our $_complete_stuff = sub {
-    require Complete::Module;
-    my $which = shift;
-    my %args = @_;
-
-    my $word = $args{word} // '';
-    my $sep = $word =~ /::/ ? '::' : '/';
-    $word =~ s/\Q$sep\E/::/g;
-
-    # convenience: allow Foo/Bar.{pm,pod,pmc}
-    $word =~ s/\.(pm|pmc|pod)\z//;
-
-    my $ns_prefix    = 'Dist::Zilla::'.
-        ($which eq 'bundle' ? 'PluginBundle' :
-             $which eq 'plugin' ? 'Plugin' :
-                 $which eq 'role' ? 'Role' : '').'::';
-
-    my $compres = Complete::Module::complete_module(
-        word      => $word,
-        ns_prefix => $ns_prefix,
-        find_pmc  => 0,
-        find_pod  => 0,
-    );
-
-    for (@$compres) { s/::/$sep/g }
-
-    {
-        words => $compres,
-        path_sep => $sep,
-    };
-};
-
-our $_complete_bundle = sub {
-    $_complete_stuff->('bundle', @_);
-};
-
-our $_complete_plugin = sub {
-    $_complete_stuff->('plugin', @_);
-};
-
-our $_complete_role = sub {
-    $_complete_stuff->('role', @_);
-};
 
 1;
 # ABSTRACT: Collection of CLI utilities for Dist::Zilla
@@ -66,7 +20,7 @@ App::DzilUtils - Collection of CLI utilities for Dist::Zilla
 
 =head1 VERSION
 
-This document describes version 0.04 of App::DzilUtils (from Perl distribution App-DzilUtils), released on 2014-12-27.
+This document describes version 0.05 of App::DzilUtils (from Perl distribution App-DzilUtils), released on 2014-12-28.
 
 =head1 SYNOPSIS
 

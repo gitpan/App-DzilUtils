@@ -1,13 +1,12 @@
 #!perl
 
-our $DATE = '2014-12-27'; # DATE
-our $VERSION = '0.04'; # VERSION
+our $DATE = '2014-12-28'; # DATE
+our $VERSION = '0.05'; # VERSION
 
 use 5.010;
 use strict;
 use warnings;
 
-use App::DzilUtils;
 use Perinci::CmdLine::Any -prefer_lite=>1;
 
 our %SPEC;
@@ -19,7 +18,11 @@ $SPEC{list_dzil_bundle_contents} = {
             schema => 'str*',
             req    => 1,
             pos    => 0,
-            completion => $App::DzilUtils::_complete_bundle,
+            completion => sub {
+                require Complete::Dist::Zilla;
+                my %args = @_;
+                Complete::Dist::Zilla::complete_dzil_bundle(word=>$args{word});
+            },
         },
         short => {
             schema => 'bool*',
@@ -75,7 +78,7 @@ list-dzil-bundle-contents - List plugins included in a Dist::Zilla plugin bundle
 
 =head1 VERSION
 
-This document describes version 0.04 of list-dzil-bundle-contents (from Perl distribution App-DzilUtils), released on 2014-12-27.
+This document describes version 0.05 of list-dzil-bundle-contents (from Perl distribution App-DzilUtils), released on 2014-12-28.
 
 =head1 SYNOPSIS
 
