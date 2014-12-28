@@ -1,7 +1,7 @@
 #!perl
 
-our $DATE = '2014-12-15'; # DATE
-our $VERSION = '0.03'; # VERSION
+our $DATE = '2014-12-27'; # DATE
+our $VERSION = '0.04'; # VERSION
 
 use 5.010;
 use strict;
@@ -70,11 +70,72 @@ list-dzil-plugin-roles - List roles included in a Dist::Zilla plugin
 
 =head1 VERSION
 
-This document describes version 0.03 of list-dzil-plugin-roles (from Perl distribution App-DzilUtils), released on 2014-12-15.
+This document describes version 0.04 of list-dzil-plugin-roles (from Perl distribution App-DzilUtils), released on 2014-12-27.
 
 =head1 SYNOPSIS
 
  % list-dzil-plugin-roles MetaJSON
+
+=head1 OPTIONS
+
+C<*> marks required options.
+
+=over
+
+=item B<--config-path>=I<s>
+
+Set path to configuration file.
+
+Can be specified multiple times.
+
+=item B<--config-profile>=I<s>
+
+Set configuration profile to use.
+
+=item B<--format>=I<s>
+
+Choose output format, e.g. json, text.
+
+=item B<--help>, B<-h>, B<-?>
+
+Display this help message.
+
+=item B<--json>
+
+Set output format to json.
+
+=item B<--naked-res>
+
+When outputing as JSON, strip result envelope.
+
+By default, when outputing as JSON, the full enveloped result is returned, e.g.:
+
+    [200,"OK",[1,2,3],{"func.extra"=>4}]
+
+The reason is so you can get the status (1st element), status message (2nd
+element) as well as result metadata/extra result (4th element) instead of just
+the result (3rd element). However, sometimes you want just the result, e.g. when
+you want to pipe the result for more post-processing. In this case you can use
+`--naked-res` so you just get:
+
+    [1,2,3]
+
+
+=item B<--no-config>
+
+Do not use any configuration file.
+
+=item B<--plugin>=I<s>*
+
+=item B<--version>, B<-v>
+
+=back
+
+=head1 FILES
+
+B</etc/list-dzil-plugin-roles.conf>
+
+B<~/list-dzil-plugin-roles.conf>
 
 =head1 COMPLETION
 

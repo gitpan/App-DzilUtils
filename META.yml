@@ -9,6 +9,7 @@ build_requires:
   Test::More: '0'
 configure_requires:
   ExtUtils::MakeMaker: '0'
+  Perl::osnames: '0.09'
 dynamic_config: 0
 generated_by: 'Dist::Zilla version 5.025, CPAN::Meta::Converter version 2.143240'
 license: perl
@@ -17,7 +18,7 @@ meta-spec:
   version: '1.4'
 name: App-DzilUtils
 requires:
-  Complete::Module: '0.04'
+  Complete::Module: '0.06'
   Module::List: '0'
   Perinci::CmdLine::Any: '0'
   Rinci: v1.1.0
@@ -26,7 +27,7 @@ resources:
   bugtracker: https://rt.cpan.org/Public/Dist/Display.html?Name=App-DzilUtils
   homepage: https://metacpan.org/release/App-DzilUtils
   repository: git://github.com/sharyanto/perl-App-DzilUtils.git
-version: '0.03'
+version: '0.04'
 x_Dist_Zilla:
   perl:
     version: '5.018002'
@@ -102,7 +103,7 @@ x_Dist_Zilla:
     -
       class: Dist::Zilla::Plugin::Rinci::AbstractFromMeta
       name: '@Author::PERLANCAR/Rinci::AbstractFromMeta'
-      version: '0.02'
+      version: '0.06'
     -
       class: Dist::Zilla::Plugin::PodnameFromFilename
       name: '@Author::PERLANCAR/PodnameFromFilename'
@@ -130,7 +131,7 @@ x_Dist_Zilla:
     -
       class: Dist::Zilla::Plugin::GenShellCompletion
       name: '@Author::PERLANCAR/GenShellCompletion'
-      version: '0.05'
+      version: '0.07'
     -
       class: Dist::Zilla::Plugin::OurDate
       name: '@Author::PERLANCAR/OurDate'
@@ -190,7 +191,7 @@ x_Dist_Zilla:
             -
               class: Pod::Weaver::Plugin::Rinci
               name: '@Author::PERLANCAR/Rinci'
-              version: '0.23'
+              version: '0.26'
             -
               class: Pod::Weaver::Section::Leftovers
               name: '@Author::PERLANCAR/Leftovers'

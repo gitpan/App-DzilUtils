@@ -2,8 +2,8 @@ NAME
     App::DzilUtils - Collection of CLI utilities for Dist::Zilla
 
 VERSION
-    This document describes version 0.03 of App::DzilUtils (from Perl
-    distribution App-DzilUtils), released on 2014-12-15.
+    This document describes version 0.04 of App::DzilUtils (from Perl
+    distribution App-DzilUtils), released on 2014-12-27.
 
 SYNOPSIS
     This distribution provides several command-line utilities related to
